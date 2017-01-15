@@ -546,11 +546,11 @@ int id always 0x7f0c001d
 int id beginning 0x7f0c001a
 int id bottom 0x7f0c0022
 int id btnSpeak 0x7f0c005c
-int id buttonClear 0x7f0c005a
+int id buttonClear 0x7f0c005b
 int id buttonPanel 0x7f0c002e
 int id buttonSend 0x7f0c0058
 int id buttonStart 0x7f0c0057
-int id buttonStop 0x7f0c0059
+int id buttonStop 0x7f0c005a
 int id cancel_action 0x7f0c0061
 int id checkbox 0x7f0c003c
 int id chronometer 0x7f0c0069
@@ -625,7 +625,7 @@ int id tabMode 0x7f0c000b
 int id text 0x7f0c0072
 int id text2 0x7f0c0070
 int id textSpacerNoButtons 0x7f0c0037
-int id textView 0x7f0c005b
+int id textView 0x7f0c0059
 int id time 0x7f0c0068
 int id title 0x7f0c002d
 int id title_template 0x7f0c0032

@@ -3,6 +3,60 @@
 
     <item
         is-multidex="false"
+        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
+        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_574944f5f31ef25f695697d6f0f1f6744d5a4616.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
+        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_84ae30fc073aa1eb6ffc91bf372922dadb2a0a1a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Eric\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.0\support-annotations-25.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="a22d2cc94da87b254451fa8ed28afc30b4653773">
+        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\support-annotations-25.0.0_704d89f168196b08ae7fd68743ceff5cd91db092.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
+        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.0.0_53946b7bb13b52d6bdbd2761b584afc9b463690f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
+        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.0.0_3e10d348e19ea5b683e3fdcb9f8bb69cb36cd68e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="26674000177e45447a0326a6ad84612761199a13">
+        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.0.0_42ea0cddc573b51f7436445207586094d5b049db.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
@@ -36,24 +90,6 @@
         revision="25.0.0"
         sha1="3b61a70884adaf0be3fc06c70c801e3e6df13133">
         <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_329f3b77a3a96a9ed428bcc7b5b8279928b67528.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="665d21a8a069c96b4d9e8b434f5096d865b4e261">
-        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_574944f5f31ef25f695697d6f0f1f6744d5a4616.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-compat\25.0.0\jars\libs\internal_impl-25.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="f2e3b9bc1ec25f652e8007ce7774c991e38f6a00">
-        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_84ae30fc073aa1eb6ffc91bf372922dadb2a0a1a.jar" />
     </item>
     <item
         is-multidex="false"
@@ -108,42 +144,6 @@
         revision="25.0.0"
         sha1="e5343c9d19cb19ff55f6b268c7f3fe8c9d224f6f">
         <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\internal_impl-25.0.0_6c5c7529463a5979fc9f6e2a658f031223355688.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Eric\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\25.0.0\support-annotations-25.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="a22d2cc94da87b254451fa8ed28afc30b4653773">
-        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\support-annotations-25.0.0_704d89f168196b08ae7fd68743ceff5cd91db092.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.0.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="76fb65a4b41ea42dab8a1310ed772a2420c96b52">
-        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.0.0_53946b7bb13b52d6bdbd2761b584afc9b463690f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="07daa0b6e1d455c82a38422ffe287c18823d339a">
-        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.0.0_3e10d348e19ea5b683e3fdcb9f8bb69cb36cd68e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.0.0\jars\classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="26674000177e45447a0326a6ad84612761199a13">
-        <dex dex="C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.0.0_42ea0cddc573b51f7436445207586094d5b049db.jar" />
     </item>
 
 </items>

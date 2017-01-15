@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:2:1-27:12
+ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:2:1-29:12
 	package
 		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:3:5-46
 		INJECTED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml
@@ -22,7 +22,7 @@ ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifes
 	android:name
 		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:6:19-59
 application
-ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:8:5-25:19
+ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:8:5-27:19
 MERGED from [com.android.support:appcompat-v7:25.0.0] C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-v4:25.0.0] C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-v4\25.0.0\AndroidManifest.xml:25:5-20
 MERGED from [com.android.support:support-fragment:25.0.0] C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\support-fragment\25.0.0\AndroidManifest.xml:25:5-20
@@ -43,11 +43,11 @@ MERGED from [com.android.support:support-compat:25.0.0] C:\Users\Eric\Documents\
 	android:theme
 		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:13:9-40
 activity#com.androidapp.voicecontrol.app.MainActivity
-ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:14:9-24:20
+ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:14:9-26:20
 	android:name
 		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:14:19-47
-intent-filter#android.hardware.usb.action.USB_DEVICE_ATTACHED+android.intent.action.MAIN+android.intent.category.LAUNCHER
-ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:15:13-19:29
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:15:13-18:29
 action#android.intent.action.MAIN
 ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:16:17-69
 	android:name
@@ -56,16 +56,18 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:17:17-77
 	android:name
 		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:17:27-74
+intent-filter#android.hardware.usb.action.USB_DEVICE_ATTACHED
+ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:19:13-21:29
 action#android.hardware.usb.action.USB_DEVICE_ATTACHED
-ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:18:17-90
+ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:20:17-90
 	android:name
-		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:18:25-87
+		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:20:25-87
 meta-data#android.hardware.usb.action.USB_DEVICE_ATTACHED
-ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:20:13-22:57
+ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:22:13-24:57
 	android:resource
-		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:22:17-54
+		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:24:17-54
 	android:name
-		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:21:17-79
+		ADDED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml:23:17-79
 uses-sdk
 INJECTED from C:\Users\Eric\Documents\GitHub\AndroidApp\App\src\main\AndroidManifest.xml reason: use-sdk injection requested
 MERGED from [com.android.support:appcompat-v7:25.0.0] C:\Users\Eric\Documents\GitHub\AndroidApp\App\build\intermediates\exploded-aar\com.android.support\appcompat-v7\25.0.0\AndroidManifest.xml:21:5-23:78

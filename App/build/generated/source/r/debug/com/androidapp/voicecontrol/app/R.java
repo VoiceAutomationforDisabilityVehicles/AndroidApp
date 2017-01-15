@@ -1839,11 +1839,11 @@ containing a value of this type.
         public static final int beginning=0x7f0c001a;
         public static final int bottom=0x7f0c0022;
         public static final int btnSpeak=0x7f0c005c;
-        public static final int buttonClear=0x7f0c005a;
+        public static final int buttonClear=0x7f0c005b;
         public static final int buttonPanel=0x7f0c002e;
         public static final int buttonSend=0x7f0c0058;
         public static final int buttonStart=0x7f0c0057;
-        public static final int buttonStop=0x7f0c0059;
+        public static final int buttonStop=0x7f0c005a;
         public static final int cancel_action=0x7f0c0061;
         public static final int checkbox=0x7f0c003c;
         public static final int chronometer=0x7f0c0069;
@@ -1918,7 +1918,7 @@ containing a value of this type.
         public static final int text=0x7f0c0072;
         public static final int text2=0x7f0c0070;
         public static final int textSpacerNoButtons=0x7f0c0037;
-        public static final int textView=0x7f0c005b;
+        public static final int textView=0x7f0c0059;
         public static final int time=0x7f0c0068;
         public static final int title=0x7f0c002d;
         public static final int title_template=0x7f0c0032;
