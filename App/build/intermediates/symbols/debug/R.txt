@@ -1435,3 +1435,4 @@ int styleable ViewStubCompat_android_id 0
 int styleable ViewStubCompat_android_inflatedId 2
 int styleable ViewStubCompat_android_layout 1
 int xml device_filter 0x7f060000
+int xml searchable 0x7f060001
