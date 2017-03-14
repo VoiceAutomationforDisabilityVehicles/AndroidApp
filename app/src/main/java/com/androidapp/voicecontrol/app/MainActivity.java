@@ -5,10 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import android.app.PendingIntent;
-import android.app.SearchManager;
-import android.content.ActivityNotFoundException;
 import android.content.BroadcastReceiver;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.IntentFilter;
 import android.graphics.Color;
@@ -23,7 +20,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.speech.RecognizerIntent;
 import android.widget.TextView;
 
@@ -174,6 +170,7 @@ public class MainActivity extends Activity implements OnClickListener {
                     restartApp(this);
                 }
             }
+
             switch (moveArm(results)){
                 case 1:
                     status.setBackgroundColor(Color.RED);
@@ -212,7 +209,6 @@ public class MainActivity extends Activity implements OnClickListener {
         sendButton.setEnabled(bool);
         stopButton.setEnabled(bool);
         textView.setEnabled(bool);
-
     }
 
     public void onClickStart(View view) {
@@ -231,13 +227,10 @@ public class MainActivity extends Activity implements OnClickListener {
                     connection = null;
                     device = null;
                 }
-
                 if (!keep)
                     break;
             }
         }
-
-
     }
 
     public void onClickSend(View view) {
