@@ -15,6 +15,7 @@ import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -34,6 +35,21 @@ public class MainActivity extends Activity implements OnClickListener {
 
     public Button speakButton, status;
     private TextView txtSpeechInput;
+
+    public enum Direction {
+        STOP(0),
+        CLOCKWISE(1),
+        COUNTERCLOCKWISE(2);
+        private int value;
+        private Direction(int value){
+            this.value = value;
+        }
+        public int getValue(){
+            return value;
+        }
+    }
+
+    Direction wantedDirection = Direction.STOP;
 
     public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
@@ -174,12 +190,21 @@ public class MainActivity extends Activity implements OnClickListener {
             switch (moveArm(results)){
                 case 1:
                     status.setBackgroundColor(Color.RED);
+                    //temporary
+                    wantedDirection = Direction.CLOCKWISE;
                     break;
                 case 2:
                     status.setBackgroundColor(Color.GREEN);
+                    //temporary
+                    wantedDirection = Direction.COUNTERCLOCKWISE;
+                    break;
+                default:
+                    wantedDirection = Direction.STOP;
+                    break;
             }
-            serialPort.write(recievedVoiceInput.getBytes());
-            tvAppend(textView, "\nData Sent : " + recievedVoiceInput + "\n");
+            String sentData = Integer.toString(wantedDirection.getValue());
+            serialPort.write(sentData.getBytes());
+            tvAppend(textView, "\nData Sent : " + sentData + "\n");
             startVoiceRecognitionActivity();
         }
     }
