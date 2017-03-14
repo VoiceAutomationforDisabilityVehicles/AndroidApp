@@ -6,7 +6,7 @@ class StepperMotor{
     void update_test_run(Direction d);
   private:
     int brake_a, brake_b, dir_a, dir_b, pwm_a, pwm_b;
-    static constexpr int delay_time = 5;
+    constexpr int delay_time = 5;
 };
 
 StepperMotor::StepperMotor(int brake_a, int brake_b, int dir_a, int dir_b, int pwm_a, int pwm_b){
