@@ -59,7 +59,7 @@ constexpr int DIRECTION_B_PIN = 13;
 constexpr int PWM_A_PIN = 3;
 constexpr int PWM_B_PIN = 11;
 
-//----------Direction to Turn the Stepper----------
+
 
 StepperMotor stepper(ENABLE_A_PIN, ENABLE_B_PIN, DIRECTION_A_PIN, DIRECTION_B_PIN, PWM_A_PIN, PWM_B_PIN);
 void setup() {
