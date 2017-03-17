@@ -38,8 +38,8 @@ public class MainActivity extends Activity implements OnClickListener {
 
     public enum Direction {
         STOP(0),
-        CLOCKWISE(1),
-        COUNTERCLOCKWISE(2);
+        OPEN(1),
+        CLOSE(2);
         private int value;
         private Direction(int value){
             this.value = value;
@@ -191,12 +191,12 @@ public class MainActivity extends Activity implements OnClickListener {
                 case 1:
                     status.setBackgroundColor(Color.RED);
                     //temporary
-                    wantedDirection = Direction.CLOCKWISE;
+                    wantedDirection = Direction.CLOSE;
                     break;
                 case 2:
                     status.setBackgroundColor(Color.GREEN);
                     //temporary
-                    wantedDirection = Direction.COUNTERCLOCKWISE;
+                    wantedDirection = Direction.OPEN;
                     break;
                 default:
                     wantedDirection = Direction.STOP;

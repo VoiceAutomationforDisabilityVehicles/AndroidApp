@@ -1,16 +1,17 @@
 #include <Stepper.h>
+#include <Servo.h>
 
-enum Direction { STOP = 0, CLOCKWISE = 1, COUNTERCLOCKWISE = 2};
+enum Direction { STOP = 0, OPEN = 1, CLOSE = 2};
 Direction requestedDirection = Direction::STOP;
-constexpr int preset_num_steps = 200;
+constexpr int preset_num_steps = 200*4;
 
 bool validDirection(Direction wantedDirection){
-  return wantedDirection == Direction::STOP || wantedDirection == Direction::CLOCKWISE || wantedDirection == Direction::COUNTERCLOCKWISE;
+  return wantedDirection == Direction::STOP || wantedDirection == Direction::OPEN || wantedDirection == Direction::CLOSE;
 }
 
 Stepper motor(200,3,13,11,12);  
+Servo servo;
 
- 
 void setup()
 {
   /**
@@ -21,8 +22,10 @@ void setup()
      -: Yellow:
      +: Red:
   */
-  Serial.begin(9600);
-  motor.setSpeed(30);
+  Serial.begin(9600); 
+  servo.attach(9,0,255);
+  servo.write(90);
+  motor.setSpeed(50);
 }
 
 void loop()
@@ -35,10 +38,10 @@ void loop()
     }
   }
   else requestedDirection = Direction::STOP;
-  if (requestedDirection == CLOCKWISE){
+  if (requestedDirection == OPEN){
     motor.step(preset_num_steps);
   }
-  if (requestedDirection == COUNTERCLOCKWISE){
+  if (requestedDirection == CLOSE){
     motor.step(-preset_num_steps);
   }
 }
