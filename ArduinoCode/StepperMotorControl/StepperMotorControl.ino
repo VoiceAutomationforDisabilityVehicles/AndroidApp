@@ -1,12 +1,17 @@
 #include <Stepper.h>
 #include <Servo.h>
 
-enum Direction { STOP = 0, OPEN = 1, CLOSE = 2};
-Direction requestedDirection = Direction::STOP;
-constexpr int preset_num_steps = 200*4;
+enum SystemState { INVALID = 0, OPEN_IN = 1, CLOSE = 2, OPEN_OUT = 3};
 
-bool validDirection(Direction wantedDirection){
-  return wantedDirection == Direction::STOP || wantedDirection == Direction::OPEN || wantedDirection == Direction::CLOSE;
+SystemState currSystemState = SystemState::CLOSE;
+SystemState requestedSystemState = SystemState::CLOSE;
+
+constexpr double preset_num_steps = 200*5.25;
+constexpr int zero_servo_pos = 70;
+constexpr int preset_servo_pos = 140;
+
+bool validSystemState(SystemState wantedState){
+  return wantedState == SystemState::OPEN_IN || wantedState == SystemState::CLOSE || wantedState == SystemState::OPEN_OUT;
 }
 
 Stepper motor(200,3,13,11,12);  
@@ -23,25 +28,97 @@ void setup()
      +: Red:
   */
   Serial.begin(9600); 
-  servo.attach(9,0,255);
-  servo.write(90);
+  servo.attach(6,0,255);
   motor.setSpeed(50);
+  
 }
+
+int cnttest = 0;
 
 void loop()
 {
-  if (Serial.available() > 0){
-    requestedDirection = static_cast<Direction>(Serial.read() - 48);
-    Serial.print("Wanted State: " + static_cast<String>(requestedDirection));
-    if (!validDirection(requestedDirection)){
-      requestedDirection = Direction::STOP;
+
+  /*if (Serial.available() > 0){
+    requestedSystemState = static_cast<SystemState>(Serial.read() - 48);
+    Serial.print("Wanted State: " + static_cast<String>(requestedSystemState));
+    if (!validSystemState(requestedSystemState)){
+      requestedSystemState = SystemState::INVALID;
     }
   }
-  else requestedDirection = Direction::STOP;
-  if (requestedDirection == OPEN){
-    motor.step(preset_num_steps);
+  else requestedSystemState = SystemState::INVALID;
+  if (requestedSystemState == SystemState::INVALID){
+    return;
+  }*/
+
+  if (cnttest == 0) {
+    currSystemState = SystemState::OPEN_OUT;
+    requestedSystemState = SystemState::CLOSE;
   }
-  if (requestedDirection == CLOSE){
-    motor.step(-preset_num_steps);
+  else{
+    requestedSystemState = SystemState::INVALID;
+    return;
   }
+  
+  if (requestedSystemState == SystemState::OPEN_IN){
+    if (currSystemState == SystemState::OPEN_IN){
+      return;
+    }
+    if (currSystemState == SystemState::OPEN_OUT){
+      closeArm();
+    }
+    if (currSystemState == SystemState::CLOSE){
+      openPos();
+      delay(1000);
+      closeArm();
+    }
+    currSystemState == SystemState::OPEN_IN;
+  }
+
+  if (requestedSystemState == SystemState::OPEN_OUT){
+    if (currSystemState == OPEN_OUT){
+      return;
+    }
+    if (currSystemState == SystemState::OPEN_IN){
+      openArm();
+    }
+    if (currSystemState == SystemState::CLOSE){
+      openPos();
+      delay(1000);
+      openArm();
+    }
+    currSystemState == SystemState::OPEN_OUT;
+  }
+  
+  if (requestedSystemState == SystemState::CLOSE){
+    if (currSystemState == SystemState::CLOSE){
+      return;
+    }
+    if (currSystemState == SystemState::OPEN_IN){
+      closePos();
+    }
+    if (currSystemState == SystemState::OPEN_OUT){
+      closeArm();
+      delay(1000);
+      closePos();
+    }
+    currSystemState == SystemState::CLOSE;
+  }
+  cnttest++;
 }
+
+void openArm(){
+  servo.write(preset_servo_pos);
+}
+
+void closeArm(){
+  servo.write(zero_servo_pos);
+}
+
+void openPos(){
+  motor.step(preset_num_steps);
+}
+
+void closePos(){
+  motor.step(-preset_num_steps);
+}
+
