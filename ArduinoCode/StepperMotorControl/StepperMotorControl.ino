@@ -3,8 +3,8 @@
 
 enum SystemState { INVALID = 0, OPEN_IN = 1, CLOSE = 2, OPEN_OUT = 3};
 
-SystemState currSystemState = SystemState::CLOSE;
-SystemState requestedSystemState = SystemState::CLOSE;
+static SystemState currSystemState;
+static SystemState requestedSystemState;
 
 constexpr double preset_num_steps = 200*5.25;
 constexpr int zero_servo_pos = 70;
@@ -30,36 +30,26 @@ void setup()
   Serial.begin(9600); 
   servo.attach(6,0,255);
   motor.setSpeed(50);
-  
+  currSystemState = SystemState::CLOSE;
+  requestedSystemState  = SystemState::INVALID;
 }
 
 int cnttest = 0;
 
 void loop()
 {
-
-  /*if (Serial.available() > 0){
+  if (Serial.available() > 0){
     requestedSystemState = static_cast<SystemState>(Serial.read() - 48);
     Serial.print("Wanted State: " + static_cast<String>(requestedSystemState));
+    Serial.print("Current State: " + static_cast<String>(currSystemState));
     if (!validSystemState(requestedSystemState)){
       requestedSystemState = SystemState::INVALID;
     }
   }
   else requestedSystemState = SystemState::INVALID;
-  if (requestedSystemState == SystemState::INVALID){
-    return;
-  }*/
 
-  if (cnttest == 0) {
-    currSystemState = SystemState::OPEN_OUT;
-    requestedSystemState = SystemState::CLOSE;
-  }
-  else{
-    requestedSystemState = SystemState::INVALID;
-    return;
-  }
-  
   if (requestedSystemState == SystemState::OPEN_IN){
+    Serial.print("Requested OPEN_IN");
     if (currSystemState == SystemState::OPEN_IN){
       return;
     }
@@ -71,7 +61,7 @@ void loop()
       delay(1000);
       closeArm();
     }
-    currSystemState == SystemState::OPEN_IN;
+    currSystemState = SystemState::OPEN_IN;
   }
 
   if (requestedSystemState == SystemState::OPEN_OUT){
@@ -86,7 +76,7 @@ void loop()
       delay(1000);
       openArm();
     }
-    currSystemState == SystemState::OPEN_OUT;
+    currSystemState = SystemState::OPEN_OUT;
   }
   
   if (requestedSystemState == SystemState::CLOSE){
@@ -101,7 +91,7 @@ void loop()
       delay(1000);
       closePos();
     }
-    currSystemState == SystemState::CLOSE;
+    currSystemState = SystemState::CLOSE;
   }
   cnttest++;
 }

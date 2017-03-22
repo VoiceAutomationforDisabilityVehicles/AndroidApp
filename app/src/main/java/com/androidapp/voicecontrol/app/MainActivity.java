@@ -29,17 +29,19 @@ import com.felhr.usbserial.UsbSerialInterface;
 
 public class MainActivity extends Activity implements OnClickListener {
 
-    String[] retractKeys = {"close", "fold", "retract"};
-    String[] openKeys = {"open", "out",};
+    String[] closeKeys = {"close", "zero"};
+    String[] openInKeys = {"open in"};
+    String[] openOutKeys = {"open out"};
     String recievedVoiceInput = "";
 
     public Button speakButton, status;
     private TextView txtSpeechInput;
 
     public enum Direction {
-        STOP(0),
-        OPEN(1),
-        CLOSE(2);
+        INVALID(0),
+        OPEN_IN(1),
+        CLOSE(2),
+        OPEN_OUT(3);
         private int value;
         private Direction(int value){
             this.value = value;
@@ -49,7 +51,7 @@ public class MainActivity extends Activity implements OnClickListener {
         }
     }
 
-    Direction wantedDirection = Direction.STOP;
+    Direction wantedDirection = Direction.CLOSE;
 
     public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
@@ -189,19 +191,22 @@ public class MainActivity extends Activity implements OnClickListener {
 
             switch (moveArm(results)){
                 case 1:
-                    status.setBackgroundColor(Color.RED);
-                    //temporary
-                    wantedDirection = Direction.CLOSE;
+                    status.setBackgroundColor(Color.GREEN);
+                    wantedDirection = Direction.OPEN_IN;
                     break;
                 case 2:
-                    status.setBackgroundColor(Color.GREEN);
-                    //temporary
-                    wantedDirection = Direction.OPEN;
+                    status.setBackgroundColor(Color.RED);
+                    wantedDirection = Direction.CLOSE;
+                    break;
+                case 3:
+                    status.setBackgroundColor(Color.BLUE);
+                    wantedDirection = Direction.OPEN_OUT;
                     break;
                 default:
-                    wantedDirection = Direction.STOP;
+                    wantedDirection = Direction.INVALID;
                     break;
             }
+
             String sentData = Integer.toString(wantedDirection.getValue());
             serialPort.write(sentData.getBytes());
             tvAppend(textView, "\nData Sent : " + sentData + "\n");
@@ -210,13 +215,17 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     public int moveArm (ArrayList<String> words){
-        for (String word: retractKeys) {
+        for (String word: openInKeys) {
             if (words.contains(word))
                 return 1;
         }
-        for (String word: openKeys) {
+        for (String word: closeKeys) {
             if (words.contains(word))
                 return 2;
+        }
+        for(String word: openOutKeys) {
+            if (words.contains(word))
+                return 3;
         }
         return 0;
     }
