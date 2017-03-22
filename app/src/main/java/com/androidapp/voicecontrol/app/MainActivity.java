@@ -15,12 +15,12 @@ import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.speech.RecognizerIntent;
 import android.widget.TextView;
 
@@ -29,15 +29,31 @@ import com.felhr.usbserial.UsbSerialInterface;
 
 public class MainActivity extends Activity implements OnClickListener {
 
-    String[] retractKeys = {"close", "fold", "retract"};
-    String[] openKeys = {"open", "out",};
+    String[] closeKeys = {"close", "zero"};
+    String[] openInKeys = {"open in"};
+    String[] openOutKeys = {"open out"};
+    String recievedVoiceInput = "";
 
-    public ListView mList;
     public Button speakButton, status;
     private TextView txtSpeechInput;
 
-    public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
+    public enum Direction {
+        INVALID(0),
+        OPEN_IN(1),
+        CLOSE(2),
+        OPEN_OUT(3);
+        private int value;
+        private Direction(int value){
+            this.value = value;
+        }
+        public int getValue(){
+            return value;
+        }
+    }
 
+    Direction wantedDirection = Direction.CLOSE;
+
+    public static final int VOICE_RECOGNITION_REQUEST_CODE = 1234;
 
     Button startButton, sendButton, clearButton, stopButton;
     TextView textView;
@@ -61,7 +77,6 @@ public class MainActivity extends Activity implements OnClickListener {
             }
         }
     };
-
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() { //Broadcast Receiver to automatically start and stop the Serial connection.
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -102,20 +117,8 @@ public class MainActivity extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
+        initializeButtons();
 
-        status = (Button) findViewById(R.id.status);
-
-        speakButton = (Button) findViewById(R.id.btnSpeak);
-        speakButton.setOnClickListener(this);
-
-        usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
-        startButton = (Button) findViewById(R.id.buttonStart);
-        sendButton = (Button) findViewById(R.id.buttonSend);
-        clearButton = (Button) findViewById(R.id.buttonClear);
-        stopButton = (Button) findViewById(R.id.buttonStop);
-        editText = (EditText) findViewById(R.id.editText);
-        textView = (TextView) findViewById(R.id.textView);
         setUiEnabled(false);
         IntentFilter filter = new IntentFilter();
         filter.addAction(ACTION_USB_PERMISSION);
@@ -123,16 +126,23 @@ public class MainActivity extends Activity implements OnClickListener {
         filter.addAction(UsbManager.ACTION_USB_DEVICE_DETACHED);
         registerReceiver(broadcastReceiver, filter);
 
-        voiceinputbuttons();
+        startVoiceRecognitionActivity();
+        onClickStart(startButton);
     }
 
-    public void informationMenu() {
-        startActivity(new Intent("android.intent.action.INFOSCREEN"));
-    }
-
-    public void voiceinputbuttons() {
+    public void initializeButtons(){
         speakButton = (Button) findViewById(R.id.btnSpeak);
-        //mList = (ListView) findViewById(R.id.list);
+        txtSpeechInput = (TextView) findViewById(R.id.txtSpeechInput);
+        status = (Button) findViewById(R.id.status);
+        speakButton = (Button) findViewById(R.id.btnSpeak);
+        speakButton.setOnClickListener(this);
+        usbManager = (UsbManager) getSystemService(this.USB_SERVICE);
+        startButton = (Button) findViewById(R.id.buttonStart);
+        sendButton = (Button) findViewById(R.id.buttonSend);
+        clearButton = (Button) findViewById(R.id.buttonClear);
+        stopButton = (Button) findViewById(R.id.buttonStop);
+        editText = (EditText) findViewById(R.id.editText);
+        textView = (TextView) findViewById(R.id.textView);
     }
 
     public void startVoiceRecognitionActivity() {
@@ -144,46 +154,78 @@ public class MainActivity extends Activity implements OnClickListener {
         startActivityForResult(intent, VOICE_RECOGNITION_REQUEST_CODE);
     }
 
+    public void restartApp(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+        if (context instanceof Activity) {
+            ((Activity) context).finish();
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Runtime.getRuntime().exit(0);
+    }
+
+    @Override
     public void onClick(View v) {
-        // TODO Auto-generated method stub
         startVoiceRecognitionActivity();
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-
-
+        Log.v("resultCode", ""+resultCode);
         if (requestCode == VOICE_RECOGNITION_REQUEST_CODE && resultCode == RESULT_OK) {
-            // Fill the list view with the strings the recognizer thought it
-            // could have heard
             ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
 
             txtSpeechInput.setText(allWords(results));
-            //txtSpeechInput.setText(results.get(0));
+            recievedVoiceInput = results.get(0);
 
-            //mList.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1, matches));
+            for(int i=0;i<results.size();i++){
+                if (results.get(i).contains("restart")){
+                    restartApp(this);
+                }
+            }
 
             switch (moveArm(results)){
                 case 1:
-                    status.setBackgroundColor(Color.RED);
+                    status.setBackgroundColor(Color.GREEN);
+                    wantedDirection = Direction.OPEN_IN;
                     break;
                 case 2:
-                    status.setBackgroundColor(Color.GREEN);
+                    status.setBackgroundColor(Color.RED);
+                    wantedDirection = Direction.CLOSE;
+                    break;
+                case 3:
+                    status.setBackgroundColor(Color.BLUE);
+                    wantedDirection = Direction.OPEN_OUT;
+                    break;
+                default:
+                    wantedDirection = Direction.INVALID;
+                    break;
             }
 
+            String sentData = Integer.toString(wantedDirection.getValue());
+            serialPort.write(sentData.getBytes());
+            tvAppend(textView, "\nData Sent : " + sentData + "\n");
+            startVoiceRecognitionActivity();
         }
     }
 
     public int moveArm (ArrayList<String> words){
-        for (String word: retractKeys) {
+        for (String word: openInKeys) {
             if (words.contains(word))
                 return 1;
         }
-        for (String word: openKeys) {
+        for (String word: closeKeys) {
             if (words.contains(word))
                 return 2;
+        }
+        for(String word: openOutKeys) {
+            if (words.contains(word))
+                return 3;
         }
         return 0;
     }
@@ -201,11 +243,9 @@ public class MainActivity extends Activity implements OnClickListener {
         sendButton.setEnabled(bool);
         stopButton.setEnabled(bool);
         textView.setEnabled(bool);
-
     }
 
     public void onClickStart(View view) {
-
         HashMap<String, UsbDevice> usbDevices = usbManager.getDeviceList();
         if (!usbDevices.isEmpty()) {
             boolean keep = true;
@@ -221,20 +261,16 @@ public class MainActivity extends Activity implements OnClickListener {
                     connection = null;
                     device = null;
                 }
-
                 if (!keep)
                     break;
             }
         }
-
-
     }
 
     public void onClickSend(View view) {
         String string = editText.getText().toString();
         serialPort.write(string.getBytes());
         tvAppend(textView, "\nData Sent : " + string + "\n");
-
     }
 
     public void onClickStop(View view) {
